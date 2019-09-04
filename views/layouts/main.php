@@ -28,6 +28,8 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+    echo \lajax\translatemanager\widgets\ToggleTranslate::widget();
+
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -43,10 +45,20 @@ AppAsset::register($this);
                 '' :
                 ['label' => 'Language', 'url' => ['/translatemanager/language']] ,
             Yii::$app->user->isGuest ?
+                '' :
+                ['label' => 'Users', 'url' => ['/user/admin']] ,
+            Yii::$app->user->isGuest ?
                 ['label' => 'Sign in', 'url' => ['/user/security/login']] :
                 ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/user/security/logout'],
-                    'linkOptions' => ['data-method' => 'post']],
+                    'linkOptions' => ['data-method' => 'post']
+                ],
+            Yii::$app->session->has(\dektrium\user\controllers\AdminController::ORIGINAL_USER_SESSION_KEY) ?
+                ['label' => 'Switch back',
+                    'url' => ['/user/admin/switch'],
+                    'linkOptions' => ['data-method' => 'post']
+                ] :
+                '',
             ['label' => 'Register', 'url' => ['/user/registration/register'], 'visible' => Yii::$app->user->isGuest],
         ],
     ]);

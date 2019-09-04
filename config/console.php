@@ -34,6 +34,16 @@ $config = [
         'db' => $db,
     ],
     'params' => $params,
+    'view' => [
+        'theme' => [
+            'pathMap' => [
+                '@dektrium/user/views' => '@app/views/user',
+                '@dektrium/rbac/views' => '@app/views/rbac',
+                '@dektrium/rbac/widgets/views' => '@app/widgets/rbac/views',
+                '@lajax/translatemanager/views' => '@app/views/translatemanager'
+            ],
+        ],
+    ],
     /*
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.

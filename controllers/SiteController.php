@@ -8,7 +8,6 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -77,6 +76,9 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            if (Yii::$app->user->identity->isAdmin) {
+                Yii::$app->session->set('frontendTranslation_EnableTranslate', 1);
+            }
             return $this->goBack();
         }
 

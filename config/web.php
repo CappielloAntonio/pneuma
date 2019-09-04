@@ -7,27 +7,44 @@ $config = [
     'id' => 'basic',
     'language' => 'it-IT',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'translatemanager'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
-            'adminPermission' => 'administrateUser',
-            'enableUnconfirmedLogin' => true,
+
+            // If this option is set to true, module sends email that contains a confirmation link that user must click to complete registration.
+            'enableConfirmation' => true,
+
+            // If this option is to true, users will be able to log in even though they didn't confirm his account.
+            'enableUnconfirmedLogin' => false,
+
+            // The time in seconds before a confirmation token becomes invalid. After expiring this time user have to request new confirmation token on special page.
             'confirmWithin' => 21600,
+
+            // Cost parameter used by the Blowfish hash algorithm. The higher the value of cost, the longer it takes to generate the hash and to verify a password against it.
             'cost' => 12,
-            'admins' => ['admin']
+
+            // Yii2-user has special admin pages where you can manager registered users or create new user accounts. You can specify the username of users that will be able to access those pages.
+            'admins' => ['admin'],
         ],
         'rbac' => 'dektrium\rbac\RbacWebModule',
         'translatemanager' => [
             'class' => 'lajax\translatemanager\Module',
+            'roles' => ['admin'],
             'root' => [
                 '@app/views',
                 '@app/models',
                 '@app/controllers',
+            ],
+            'controllerMap' => [
+                'language' => [
+                    'class' => 'app\controllers\translatemanager\LanguageController',
+                    'layout' => '//main',
+                ],
             ],
         ],
     ],
@@ -72,6 +89,9 @@ $config = [
             ],
         ],
         'db' => $db,
+        'translatemanager' => [
+            'class' => 'lajax\translatemanager\Component'
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
