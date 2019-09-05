@@ -1,11 +1,14 @@
 <?php
 
+use yii\helpers\Url;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
     'language' => 'it-IT',
+    'name' => 'Template',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'translatemanager'],
     'aliases' => [
@@ -30,6 +33,18 @@ $config = [
 
             // Yii2-user has special admin pages where you can manager registered users or create new user accounts. You can specify the username of users that will be able to access those pages.
             'admins' => ['admin'],
+
+            'controllerMap' => [
+                'security' => 'app\controllers\user\SecurityController',
+                'registration' => [
+                    'class' => 'dektrium\user\controllers\RegistrationController',
+                    'layout' => '//main-login'
+                ],
+                'recovery' => [
+                    'class' => 'dektrium\user\controllers\RecoveryController',
+                    'layout' => '//main-login'
+                ],
+            ],
         ],
         'rbac' => 'dektrium\rbac\RbacWebModule',
         'translatemanager' => [
@@ -95,8 +110,9 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+        ],
+        'user' => [
+            'loginUrl' => 'user/login'
         ],
     ],
     'params' => $params,
