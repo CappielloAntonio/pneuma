@@ -66,17 +66,4 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
 }

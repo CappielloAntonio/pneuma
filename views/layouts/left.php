@@ -29,13 +29,13 @@ $username = !Yii::$app->user->isGuest ? Yii::$app->user->identity->username : ''
         <?php
         if(Yii::$app->user->identity->isAdmin) {
             $item = [
-                ['label' => 'Main Menu', 'options' => ['class' => 'header']],
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                ['label' => Yii::t('layout', 'Main Menu'), 'options' => ['class' => 'header']],
+                ['label' => Yii::t('layout', 'Home'), 'url' => ['/site/index']],
+                ['label' => Yii::t('layout', 'Login'), 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 
-                ['label' => 'Admin Menu', 'options' => ['class' => 'header']],
-                ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                ['label' => Yii::t('layout', 'Admin Menu'), 'options' => ['class' => 'header']],
+                ['label' => Yii::t('layout', 'Gii'), 'icon' => 'file-code-o', 'url' => ['/gii']],
+                ['label' => Yii::t('layout', 'Debug'), 'icon' => 'dashboard', 'url' => ['/debug']],
                 ['label' => Yii::t('layout', 'Language'), 'items' => [
                     ['label' => Yii::t('layout', 'List of languages'), 'url' => ['/translatemanager/language/list']],
                     ['label' => Yii::t('layout', 'Create'), 'url' => ['/translatemanager/language/create']],
@@ -48,21 +48,21 @@ $username = !Yii::$app->user->isGuest ? Yii::$app->user->identity->username : ''
                 ]],
                 ['label' => Yii::t('layout', 'RBAC'), 'url' => ['/user/admin/index']],
 
-                ['label' => 'User', 'options' => ['class' => 'header']],
-                ['label' => 'Profile', 'icon' => 'user', 'url' => ['/user/profile']],
-                ['label' => 'Settings', 'icon' => 'user', 'url' => ['/user/settings']],
-                ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')', 'icon' => 'file-code-o', 'url' => ['/user/security/logout'], 'option' => ['method' => 'post']]
+                ['label' => Yii::t('layout', 'User'), 'options' => ['class' => 'header']],
+                ['label' => Yii::t('layout', 'Profile'), 'icon' => 'user', 'url' => ['/user/profile']],
+                ['label' => Yii::t('layout', 'Settings'), 'icon' => 'user', 'url' => ['/user/settings']],
+                ['label' => Yii::t('layout', 'Sign out') . ' (' . Yii::$app->user->identity->username . ')', 'icon' => 'file-code-o', 'url' => ['/user/security/logout'], 'option' => ['method' => 'post']]
             ];
         } else {
             $item = [
-                ['label' => 'Main Menu', 'options' => ['class' => 'header']],
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                ['label' => Yii::t('layout', 'Main Menu'), 'options' => ['class' => 'header']],
+                ['label' => Yii::t('layout', 'Home'), 'url' => ['/site/index']],
+                ['label' => Yii::t('layout', 'Login'), 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 
-                ['label' => 'User', 'options' => ['class' => 'header']],
-                ['label' => 'Profile', 'icon' => 'user', 'url' => ['/user/profile']],
-                ['label' => 'Settings', 'icon' => 'user', 'url' => ['/user/settings']],
-                ['label' => 'Sign out (' . $username . ')', 'icon' => 'file-code-o', 'url' => ['/user/security/logout'], 'option' => ['method' => 'post']]
+                ['label' => Yii::t('layout', 'User'), 'options' => ['class' => 'header']],
+                ['label' => Yii::t('layout', 'Profile'), 'icon' => 'user', 'url' => ['/user/profile']],
+                ['label' => Yii::t('layout', 'Settings'), 'icon' => 'user', 'url' => ['/user/settings']],
+                ['label' => Yii::t('layout', 'Sign out') . ' (' . $username . ')', 'icon' => 'file-code-o', 'url' => ['/user/security/logout'], 'option' => ['method' => 'post']]
             ];
         } ?>
 
