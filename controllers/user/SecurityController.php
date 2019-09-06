@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Dektrium project.
- *
- * (c) Dektrium project <http://github.com/dektrium/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace app\controllers\user;
 
 use Yii;
@@ -62,6 +53,7 @@ class SecurityController extends BaseClass
         $this->trigger(self::EVENT_BEFORE_LOGIN, $event);
 
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->login()) {
+            // Front end in translating mode - Activation mode
             if (Yii::$app->user->identity->isAdmin) {
                 Yii::$app->session->set('frontendTranslation_EnableTranslate', 1);
             }

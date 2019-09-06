@@ -20,11 +20,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => [ 'index'],
+                        'actions' => [ 'index', 'error'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -65,5 +61,18 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * Displays error page.
+     *
+     * @return string
+     */
+    public function actionError()
+    {
+        return $this->render('error', [
+            'name' => 'Nome',
+            'message' => 'Messaggio'
+        ]);
     }
 }
