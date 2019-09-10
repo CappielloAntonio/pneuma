@@ -1,6 +1,8 @@
 <?php
 
+use app\modules\system\models\SystemLog;
 use dektrium\user\models\Profile;
+use yii\helpers\Url;
 use lajax\translatemanager\helpers\Language as Lx;
 use yii\helpers\Html;
 
@@ -22,8 +24,11 @@ $username = !Yii::$app->user->isGuest ? Yii::$app->user->identity->username : ''
             </div>
 
             <div class="pull-left info">
-                <p><?= $username ?></p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <p><?php echo Yii::t('layout', 'Hello, {username}', ['username' => $username]) ?></p>
+                <a href="<?php echo Url::to(['/sign-in/profile']) ?>">
+                    <i class="fa fa-circle text-success"></i>
+                    <?php echo Yii::$app->formatter->asDatetime(time()) ?>
+                </a>
             </div>
         </div>
 
@@ -49,6 +54,12 @@ $username = !Yii::$app->user->isGuest ? Yii::$app->user->identity->username : ''
                     ]]
                 ]],
                 ['label' => Yii::t('layout', 'RBAC'), 'icon' => 'institution',  'url' => ['/user/admin/index']],
+                [
+                    'label' => Yii::t('layout', 'Logs'),
+                    'icon' => 'warning',
+                    'url' => ['/system/log/index'],
+                    'template'=>'<a href="{url}">{icon} {label}<span class="pull-right-container"><small class="label pull-right bg-red">' . SystemLog::find()->count() . '</small></span></a>'
+                ],
 
                 ['label' => Yii::t('layout', 'User'), 'options' => ['class' => 'header']],
                 ['label' => Yii::t('layout', 'Profile'), 'icon' => 'user', 'url' => ['/user/profile']],

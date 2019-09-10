@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\user;
+namespace app\modules\user\controllers;
 
 use Yii;
 use dektrium\user\models\LoginForm;

@@ -9,6 +9,7 @@ $config = [
     'id' => 'basic',
     'language' => 'it-IT',
     'name' => 'Template',
+    'timeZone' => 'Europe/Rome',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'translatemanager'],
     'aliases' => [
@@ -34,8 +35,9 @@ $config = [
             // Yii2-user has special admin pages where you can manager registered users or create new user accounts. You can specify the username of users that will be able to access those pages.
             'admins' => ['admin'],
 
+            // Faccio in modo che le classi dell'estensione User puntino al layout vuoto, quello senza sidebar o header
             'controllerMap' => [
-                'security' => 'app\controllers\user\SecurityController',
+                'security' => 'app\modules\user\controllers\SecurityController',
                 'registration' => [
                     'class' => 'dektrium\user\controllers\RegistrationController',
                     'layout' => '//main-login'
@@ -51,16 +53,20 @@ $config = [
             'class' => 'lajax\translatemanager\Module',
             'roles' => ['admin'],
             'root' => [
+                '@app/modules',
                 '@app/views',
                 '@app/models',
                 '@app/controllers',
             ],
             'controllerMap' => [
                 'language' => [
-                    'class' => 'app\controllers\translatemanager\LanguageController',
+                    'class' => 'app\modules\translation\controllers\LanguageController',
                     'layout' => '//main',
                 ],
             ],
+        ],
+        'system' => [
+            'class' => 'app\modules\system\Module',
         ],
     ],
     'components' => [
@@ -96,8 +102,8 @@ $config = [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'class' => 'yii\log\DbTarget',
+                    'levels' => ['error'],
                 ],
             ],
         ],
@@ -130,14 +136,6 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
-        'generators' => [ // HERE
-            'crud' => [
-                'class' => 'yii\gii\generators\crud\Generator',
-                'templates' => [
-                    'adminlte' => '@vendor/dmstr/yii2-adminlte-asset/gii/templates/crud/simple',
-                ]
-            ]
-        ],
     ];
 }
 

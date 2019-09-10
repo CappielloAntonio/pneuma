@@ -25,7 +25,6 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
-
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),

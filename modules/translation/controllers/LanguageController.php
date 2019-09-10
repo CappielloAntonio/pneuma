@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\translatemanager;
+namespace app\modules\translation\controllers;
 
 use dektrium\user\filters\AccessRule;
 use lajax\translatemanager\controllers\LanguageController as BaseLanguageController;
